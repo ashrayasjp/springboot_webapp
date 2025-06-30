@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @RequestMapping("/")
     public String home() {
-        return "Go to localhost/8080/login for login";
+        return "Go to localhost:8080/login for login                                                     |                                                          localhost:8080/authorized for Login Details";
     }
 }
