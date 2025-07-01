@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SignUp Page</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body style="background-color: black; color: white;">
+    <h2>Sign Up</h2>
+
+    <form id="signupForm" action="/signup" method="post">
+
+        <label>Email:</label>
+        <input type="email" name="email" id="email" required><br>
+        <div class="error" id="emailError"></div><br>
+
+        <label>Username:</label>
+        <input type="text" name="username" id="username" required><br>
+        <div class="error" id="usernameError"></div><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" id="password" required><br>
+        <div class="error" id="passwordError"></div><br>
+
+        <label>Confirm Password:</label>
+        <input type="password" id="confirmPassword" required><br>
+        <div class="error" id="confirmError"></div><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function (e) {
+            let isValid = true;
+            document.getElementById("emailError").innerText = "";
+            document.getElementById("usernameError").innerText = "";
+            document.getElementById("passwordError").innerText = "";
+            document.getElementById("confirmError").innerText = "";
+
+            const email = document.getElementById("email").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/;
+
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerText = "Enter a valid email.";
+                isValid = false;
+            }
+
+            if (username.length < 4 || username.length > 20) {
+                document.getElementById("usernameError").innerText = "Username must be 4–20 characters.";
+                isValid = false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                document.getElementById("passwordError").innerText =
+                    "Password must be 8+ chars with uppercase, lowercase, number, and symbol.";
+                isValid = false;
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById("confirmError").innerText = "Passwords do not match.";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault(); 
+            }
+        });
+    </script>
+</body>
+</html>

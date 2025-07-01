@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
     @RequestMapping("/")
-    public String home() {
-        return "Go to localhost:8080/login for login                                                     |                                                          localhost:8080/authorized for Login Details";
+    public String log() {
+        return "<button onclick=\"window.location.href='/login'\">Login</button> &nbsp; &nbsp; <button onclick=\"window.location.href='/signup'\">Signup</button>";
+
     }
+
 }
