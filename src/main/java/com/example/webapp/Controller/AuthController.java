@@ -53,7 +53,7 @@ public class AuthController {
         }
 
         session.setAttribute("username", dbUser.getUsername());
-        return "redirect:/secret";
+        return "redirect:/cart";
     }
 
     @GetMapping("/authorized")
@@ -62,13 +62,14 @@ public class AuthController {
         return "Authorized";
     }
 
-    @GetMapping("/secret")
-    public String secretPage(HttpSession session) {
+    @GetMapping("/cart")
+    public String secretPage(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             return "redirect:/login";
         }
-        return "Secret";
+        model.addAttribute("username", username);
+        return "Cart";
     }
 
 }

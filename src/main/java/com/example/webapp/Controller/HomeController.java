@@ -1,13 +1,13 @@
 package com.example.webapp.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Controller
 public class HomeController {
-    @RequestMapping("/")
+    @GetMapping("/")
     public String log() {
-        return "<button onclick=\"window.location.href='/login'\">Login</button> &nbsp; &nbsp; <button onclick=\"window.location.href='/signup'\">Signup</button>";
+        return "Home";
 
     }
 
