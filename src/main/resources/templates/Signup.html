@@ -7,6 +7,18 @@
             color: red;
             font-size: 0.9em;
         }
+        
+            button{
+                background-color: #2CFF05;
+                height:30px;
+                width: 90px;
+                color: black;
+            }
+            a {
+                color: black;
+                text-decoration: none;
+            }
+        
     </style>
 </head>
 <body style="background-color: black; color: white;">
@@ -32,9 +44,13 @@
 
         <button type="submit">Sign Up</button>
     </form>
+    <br>
+    
 
     <p class="error" th:if="${error}" th:text="${error}"></p>
-
+    Already have an account?
+    <br>
+    <button><a th:href = "@{/login}">Login</a></button>
     <script>
         document.getElementById("signupForm").addEventListener("submit", function (e) {
             let isValid = true;
