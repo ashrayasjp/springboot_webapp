@@ -1,12 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <title>Home</title>
+    <style>
+        body {
+            padding-top: 0px;
+            background-color: #CDC0BB;
+            font-family: Verdana, sans-serif;
+            margin: 0px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 50px;
+            padding: 10px;
+            margin: 0px;
+        }
+
+        .dancing-font {
+            font-family: "Dancing Script", cursive;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .nav li {
+            font-size: 22px;
+            font-family: Georgia;
+            padding: 20px;
+            position: relative;
+        }
+
+        .nav li a {
+            text-decoration: none;
+            color: maroon;
+            cursor: pointer;
+        }
+
+        .nav li a:hover {
+            color: #000;
+        }
+
+        .container {
+            background-color: #0093fc;
+            height: 70px;
+            width: 125%;
+            margin-top: 0px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            min-width: 120px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: maroon;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
 </head>
-<body style="background-color: rgb(210, 197, 176)">
-    <h2>
-    WELCOME,
-    <span th:text = "${username}"></span></h2>
-    <br>
-    Thank you for logging in 
-</body></html>
+<body>
+<div class="container">
+    <ul class="nav">
+        <div class="dancing-font">Super Electronics</div>
+        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+        <li><a th:href="@{/cart}">Home</a></li>
+        <li><a th:href="@{/about}">About</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <li class="dropdown">
+            <a><span th:text="${username}">Username</span></a>
+            <div class="dropdown-content">
+                <a th:href="@{/logout}">Logout</a>
+            </div>
+       
+        
+        </li>
+    </ul>
+</div>
+</body>
+</html>

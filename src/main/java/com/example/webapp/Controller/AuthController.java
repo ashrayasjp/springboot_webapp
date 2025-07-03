@@ -34,7 +34,7 @@ public class AuthController {
             return "Signup";
         }
         userRepository.save(user);
-        return "redirect:/login";
+        return "redirect:/cart";
 
     }
 
@@ -70,6 +70,13 @@ public class AuthController {
         }
         model.addAttribute("username", username);
         return "Cart";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/home";
+
     }
 
 }
