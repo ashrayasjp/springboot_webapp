@@ -1,68 +1,229 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><link rel="preconnect" href="https://fonts.googleapis.com">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-    
+
     <title>Home</title>
     <style>
         body {
-            padding-top: 0px;
             background-color: #CDC0BB;
             font-family: Verdana, sans-serif;
             margin: 0px;
         }
-        
+
         .nav {
             display: flex;
             align-items: center;
             list-style: none;
             gap: 50px;
             padding: 10px;
-            margin:0px;
-           
-           
+            margin: 0px;
         }
+
         .dancing-font {
-            font-family: "Dancing Script" , cursive;
-            font-size: 30px; 
+            font-family: "Dancing Script", cursive;
+            font-size: 30px;
             font-weight: bold;
-           
         }
+
         .nav li {
             font-size: 22px;
-           
             font-family: Georgia;
-           padding:20px;
+            padding: 20px;
+            position: relative;
         }
+
         .nav li a {
             text-decoration: none;
             color: maroon;
         }
+
         .nav li a:hover {
             color: #000;
         }
-        .container{
-            background-color: #0093fc ;
-            height:70px;
-            width: 125%;
-            margin-top: 0px;
+
+        .container {
+            background-color: #0093fc;
+            height: 70px;
+            width: 100%;
         }
-       
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            min-width: 120px;
+            z-index: 1;
+        }
+
+        .dropdown-content form button {
+            display: block;
+            padding: 10px;
+            color: maroon;
+            font-size: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .product-card h3 {
+            color: maroon;
+        }
+
+        .product-card p {
+            font-size: 14px;
+        }
+
+        .product-card button {
+            padding: 6px 12px;
+            background-color: #0093fc;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-card button:hover {
+            background-color: maroon;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
-<div  class  = "container">
+
+<div class="container">
     <ul class="nav">
-        <div class = dancing-font>Super Electronics</div>
-        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+        <div class="dancing-font">Super Electronics</div>
         <li><a th:href="@{/home}">Home</a></li>
-        <li><a th:href= "@{/about}">About</a></li>
+        <li><a th:href="@{/about}">About</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
-        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-        <li><a th:href="@{/signup}">SignUp</a><li>
+
+        <li th:if="${session.username == null}">
+            <a th:href="@{/signup}">SignUp</a>
+        </li>
+
+        <li th:if="${session.username != null}" class="dropdown">
+            <a><span th:text="${session.username}">Username</span></a>
+            <div class="dropdown-content">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </li>
     </ul>
-<div>
+</div>
+
+<!-- Products Grid -->
+<div class="products">
+    <!-- Mouse -->
+    <div class="product-card">
+        <img src="/images/mouse.jpg" alt="Mouse">
+        <h3>Mouse</h3>
+        <p>Wireless optical mouse with ergonomic design.</p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="name" value="Mouse"/>
+            <input type="hidden" name="price" value="999"/>
+            Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- Keyboard -->
+    <div class="product-card">
+        <img src="/images/keyboard.jpg" alt="Keyboard">
+        <h3>Keyboard</h3>
+        <p>Mechanical RGB keyboard with fast response keys.</p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="name" value="Keyboard"/>
+            <input type="hidden" name="price" value="1599"/>
+            Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- Graphics Card -->
+    <div class="product-card">
+        <img src="/images/gpu.jpg" alt="Graphics Card">
+        <h3>Graphics Card</h3>
+        <p>NVIDIA RTX 4060 – 8GB GDDR6 for ultimate gaming.</p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="name" value="Graphics Card"/>
+            <input type="hidden" name="price" value="54999"/>
+            Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- Processor -->
+    <div class="product-card">
+        <img src="/images/i9.jpg" alt="Processor i9">
+        <h3>Processor i9</h3>
+        <p>Intel Core i9-13900K – 13th Gen with 24 cores.</p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="name" value="Processor i9"/>
+            <input type="hidden" name="price" value="69999"/>
+            Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- Printer -->
+    <div class="product-card">
+        <img src="/images/printer.jpg" alt="Printer">
+        <h3>Printer</h3>
+        <p>Wireless all-in-one inkjet printer with scanner.</p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="name" value="Printer"/>
+            <input type="hidden" name="price" value="6499"/>
+            Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- TV -->
+    <div class="product-card">
+        <img src="/images/tv.jpg" alt="TV">
+        <h3>TV</h3>
+        <p>55&quot; 4K Smart LED TV with HDR support.</p>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="name" value="TV"/>
+            <input type="hidden" name="price" value="45999"/>
+            Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

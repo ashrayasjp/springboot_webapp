@@ -77,6 +77,20 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        table {
+            width: 70%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
 
     </style>
 </head>
@@ -85,7 +99,7 @@
     <ul class="nav">
         <div class="dancing-font">Super Electronics</div>
         &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-        <li><a th:href="@{/cart}">Home</a></li>
+        <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/about}">About</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
         &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -99,5 +113,37 @@
         </li>
     </ul>
 </div>
+<h2>Your Shopping Cart</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Action</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${cart}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.total}"></td>
+            <td>
+                <form th:action="@{/cart}" method="post" style="display:inline;">
+                    <input type="hidden" name="name" th:value="${item.name}" />
+                    <input type="hidden" name="action" value="remove" />
+                    <button type="submit" style="cursor:pointer;">Remove from cart</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: right; font-weight: bold;">Grand Total</td>
+            <td th:text="${grandTotal}"></td>
+        </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

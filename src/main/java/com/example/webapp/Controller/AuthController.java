@@ -62,16 +62,6 @@ public class AuthController {
         return "Authorized";
     }
 
-    @GetMapping("/cart")
-    public String secretPage(HttpSession session, Model model) {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("username", username);
-        return "Cart";
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
