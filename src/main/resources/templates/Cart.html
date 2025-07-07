@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         body {
             padding-top: 0px;
-            background-color: #CDC0BB;
+            background-color: #F4F4F9;
             font-family: Verdana, sans-serif;
             margin: 0px;
         }
@@ -77,73 +79,107 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        h2 {
+            text-align: center;
+            margin: 30px 0 10px;
+        }
+
         table {
-            width: 70%;
+            width: 75%;
             margin: auto;
             border-collapse: collapse;
             background-color: white;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-        h2 {
-            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
+        th {
+            background-color: #239b56;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        td:last-child {
+            width: 100px;
+        }
+
+        .remove-btn {
+            background-color: transparent;
+            border: none;
+            color: #cc0000;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            color: #ff0000;
+        }
+
+        .grand-total-row td {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <ul class="nav">
-        <div class="dancing-font">Super Electronics</div>
-        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+        <div class="dancing-font">Met International</div>
+        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/about}">About</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
-        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <li class="dropdown">
             <a><span th:text="${username}">Username</span></a>
             <div class="dropdown-content">
                 <a th:href="@{/logout}">Logout</a>
             </div>
-       
-        
         </li>
     </ul>
 </div>
-<h2>Your Shopping Cart</h2>
+
+<h2>Your Cart</h2>
 <table>
     <thead>
-        <tr>
-            <th>Item</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Action</th> 
-        </tr>
+    <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
     </thead>
     <tbody>
-        <tr th:each="item : ${cart}">
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.quantity}"></td>
-            <td th:text="${item.price}"></td>
-            <td th:text="${item.total}"></td>
-            <td>
-                <form th:action="@{/cart}" method="post" style="display:inline;">
-                    <input type="hidden" name="name" th:value="${item.name}" />
-                    <input type="hidden" name="action" value="remove" />
-                    <button type="submit" style="cursor:pointer;">Remove from cart</button>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4" style="text-align: right; font-weight: bold;">Grand Total</td>
-            <td th:text="${grandTotal}"></td>
-        </tr>
+    <tr th:each="item : ${cart}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${item.total}"></td>
+        <td>
+            <form th:action="@{/cart}" method="post">
+                <input type="hidden" name="name" th:value="${item.name}" />
+                <input type="hidden" name="action" value="remove" />
+                <button type="submit" class="remove-btn" title="Remove from cart">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    <tr class="grand-total-row">
+        <td colspan="4" style="text-align: right;">Grand Total</td>
+        <td th:text="${grandTotal}"></td>
+    </tr>
     </tbody>
 </table>
-
 </body>
 </html>
+s

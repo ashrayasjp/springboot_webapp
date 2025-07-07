@@ -1,8 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courgette&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 <head>
     <title>About us</title>
 </head>
-<body style="background-color: rgb(210, 197, 176)">
-    About Page
+<style>
+    body {
+        padding-top: 0px;
+        background-color: #F4F4F9;
+        font-family: Verdana, sans-serif;
+        margin: 0px;
+    }
+    h2 {
+        text-align: center;
+        margin: 30px 0 10px;
+    }
+    .nav {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        gap: 50px;
+        padding: 10px;
+        margin: 0px;
+    }
+
+    .dancing-font {
+        font-family: "Dancing Script", cursive;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .nav li {
+        font-size: 22px;
+        font-family: Georgia;
+        padding: 20px;
+        position: relative;
+    }
+
+    .nav li a {
+        text-decoration: none;
+        color: maroon;
+        cursor: pointer;
+    }
+
+    .nav li a:hover {
+        color: #000;
+    }
+    .container {
+        background-color: #0093fc;
+        height: 70px;
+        width: 125%;
+        margin-top: 0px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: white;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        min-width: 120px;
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 10px;
+        color: maroon;
+        text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    span {
+        background: black;
+    }
+</style>
+
+<body>
+   
+        <div class="container">
+            <ul class="nav">
+                <div class="dancing-font">Met International</div>
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/about}">About</a></li>
+                <li><a th:href="@{/cart}">Cart</a></li>
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <li class="dropdown">
+                    <a><span th:text="${username}">Username</span></a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/logout}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div style="max-width: 700px; margin: 30px auto; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-family:Courgette, cursive;">
+            <p style=" line-height: 1.6; text-align: justify;">
+                <h1><center>About Us</h1></center>
+        <h2 style = "font-size: 25px;">
+                Met International is an online store where you can find quality electronic products like keyboards, mice, processors, and more. 
+                 Our goal is to make electronics shopping easy and affordable for everyone.
+            </p><p>
+                 We focus on providing good service, fast delivery, and reliable products. Whether you’re a gamer, a student, or someone who loves gadgets, 
+                 we have something for you.
+            </p><p>
+                 Thank you for visiting Met International. We’re happy to have you here!
+            </p>
+        </h2>
+        </div>
+        
+      
+   
 </body></html>

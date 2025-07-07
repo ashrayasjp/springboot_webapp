@@ -8,21 +8,26 @@
             font-size: 0.9em;
         }
         
-            button{
-                background-color: #2CFF05;
-                height:30px;
-                width: 90px;
-                color: black;
-            }
-            a {
-                color: black;
-                text-decoration: none;
-            }
-        
+        button{
+            background-color: #2CFF05;
+            height:30px;
+            width: 90px;
+            color: black;
+            font-size:17px;
+            font-weight: bold;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        label  {
+            font-size: 20px;
+        }
+            
     </style>
 </head>
 <body style="background-color: black; color: white;">
-    <h2>Sign Up</h2>
+    <h1>Sign Up</h1>
 
     <form id="signupForm" action="/signup" method="post">
 
@@ -48,7 +53,7 @@
     
 
     <p class="error" th:if="${error}" th:text="${error}"></p>
-    Already have an account?
+  <label>  Already have an account?</label>
     <br>
     <button><a th:href = "@{/login}">Login</a></button>
     <script>

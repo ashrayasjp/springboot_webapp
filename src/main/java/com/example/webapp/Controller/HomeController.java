@@ -73,10 +73,10 @@ public class HomeController {
         }
 
         if ("remove".equalsIgnoreCase(action)) {
-            // Remove the item with matching name
+
             cart.removeIf(item -> item.getName().equals(name));
         } else {
-            // Add or update item quantity
+
             boolean found = false;
             for (CartItem item : cart) {
                 if (item.getName().equals(name)) {
