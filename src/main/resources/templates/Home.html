@@ -326,9 +326,17 @@
     const forms = document.querySelectorAll('.cart-form');
     const modal = document.getElementById('modal');
 
+    const isLoggedIn = /*[[${session.username != null}]]*/ false;
+
     forms.forEach(form => {
         form.addEventListener('submit', function (e) {
-            e.preventDefault(); 
+            e.preventDefault();
+
+            if (!isLoggedIn) {
+                alert("Please log in to add items to your cart.");
+                window.location.href = '/login';  // Redirect to login page
+                return;
+            }
 
             const formData = new FormData(form);
 
@@ -356,6 +364,7 @@
         }, 1000);
     }
 </script>
+
 
         
 </html>
