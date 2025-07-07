@@ -8,11 +8,11 @@
     <title>Home</title>
     <style>
         body {
-            background-color: #CDC0BB;
+            background-color: #F4F4F9;
             font-family: Verdana, sans-serif;
             margin: 0px;
         }
-
+        
         .nav {
             display: flex;
             align-items: center;
@@ -21,35 +21,35 @@
             padding: 10px;
             margin: 0px;
         }
-
+        
         .dancing-font {
             font-family: "Dancing Script", cursive;
             font-size: 30px;
             font-weight: bold;
         }
-
+        
         .nav li {
             font-size: 22px;
             font-family: Georgia;
             padding: 20px;
             position: relative;
         }
-
+        
         .nav li a {
             text-decoration: none;
             color: maroon;
         }
-
+        
         .nav li a:hover {
             color: #000;
         }
-
+        
         .container {
             background-color: #0093fc;
             height: 70px;
             width: 100%;
         }
-
+        
         .dropdown-content {
             display: none;
             position: absolute;
@@ -60,7 +60,7 @@
             min-width: 120px;
             z-index: 1;
         }
-
+        
         .dropdown-content form button {
             display: block;
             padding: 10px;
@@ -72,52 +72,59 @@
             width: 100%;
             text-align: left;
         }
-
+        
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
+        
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             padding: 30px;
         }
-
+        
         .product-card {
-            background-color: white;
+            background-color: #FFFFFF;
             padding: 15px;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            shadow:#CCCCCC;
         }
-
+        
         .product-card h3 {
-            color: maroon;
+            color: #C62828;
         }
-
+        
         .product-card p {
             font-size: 14px;
+            color: #555555;
         }
-
+        
         .product-card button {
             padding: 6px 12px;
-            background-color: #0093fc;
+            background-color: #239b56;
             border: none;
             color: white;
             border-radius: 5px;
             cursor: pointer;
         }
-
+        
         .product-card button:hover {
-            background-color: maroon;
+            background-color: #0056b3;
         }
-
+        
         .product-card img {
             width: 100%;
             height: 150px;
             object-fit: contain;
         }
+        
+        #color {
+            color: #AA6C39;
+        }
+        
     </style>
 </head>
 <body>
@@ -125,10 +132,11 @@
 <div class="container">
     <ul class="nav">
         <div class="dancing-font">Super Electronics</div>
+        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
         <li><a th:href="@{/home}">Home</a></li>
         <li><a th:href="@{/about}">About</a></li>
         <li><a th:href="@{/cart}">Cart</a></li>
-
+        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <li th:if="${session.username == null}">
             <a th:href="@{/signup}">SignUp</a>
         </li>
@@ -149,11 +157,14 @@
     <!-- Mouse -->
     <div class="product-card">
         <img src="/images/mouse.jpg" alt="Mouse">
-        <h3>Mouse</h3>
-        <p>Wireless optical mouse with ergonomic design.</p>
+        <h3>Razer Viper Mini </h3>
+        <p>Razer's lightest gaming mouse with optimal switches</p>
+
         <form th:action="@{/cart}" method="post">
             <input type="hidden" name="name" value="Mouse"/>
-            <input type="hidden" name="price" value="999"/>
+            <input type="hidden" name="price" value="3400"/>
+            <div id  = "color">Price: Rs 3400</div>
+            <br>
             Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
             <button type="submit">Add to Cart</button>
         </form>
@@ -166,7 +177,9 @@
         <p>Mechanical RGB keyboard with fast response keys.</p>
         <form th:action="@{/cart}" method="post">
             <input type="hidden" name="name" value="Keyboard"/>
-            <input type="hidden" name="price" value="1599"/>
+            <input type="hidden" name="price" value="5000"/>
+            <div id = "color">Price : Rs 5000</div>
+            <br>
             Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
             <button type="submit">Add to Cart</button>
         </form>
@@ -180,6 +193,8 @@
         <form th:action="@{/cart}" method="post">
             <input type="hidden" name="name" value="Graphics Card"/>
             <input type="hidden" name="price" value="54999"/>
+            <div id = "color">Price : Rs 54999</div>
+            <br>
             Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
             <button type="submit">Add to Cart</button>
         </form>
@@ -193,6 +208,8 @@
         <form th:action="@{/cart}" method="post">
             <input type="hidden" name="name" value="Processor i9"/>
             <input type="hidden" name="price" value="69999"/>
+            <div id = "color">Price : Rs 69999</div>
+            <br>
             Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
             <button type="submit">Add to Cart</button>
         </form>
@@ -205,7 +222,9 @@
         <p>Wireless all-in-one inkjet printer with scanner.</p>
         <form th:action="@{/cart}" method="post">
             <input type="hidden" name="name" value="Printer"/>
-            <input type="hidden" name="price" value="6499"/>
+            <input type="hidden" name="price" value="21000"/>
+            <div id = "color">Price : Rs 21000</div>
+            <br>
             Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
             <button type="submit">Add to Cart</button>
         </form>
@@ -219,6 +238,8 @@
         <form th:action="@{/cart}" method="post">
             <input type="hidden" name="name" value="TV"/>
             <input type="hidden" name="price" value="45999"/>
+            <div id = "color">Price : Rs 45999</div>
+            <br>
             Qty: <input type="number" name="quantity" value="1" min="1" style="width: 50px;"><br><br>
             <button type="submit">Add to Cart</button>
         </form>
